@@ -1,0 +1,139 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="jquery-ui/jquery-ui.css">
+        
+        <link href="https://fonts.googleapis.com/css?family=Francois+One" rel="stylesheet">
+        
+        <link id="css" rel="stylesheet" type="text/css" href="codeplayer.style.css">
+
+        
+        <script type ="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+        
+        <script src="jquery-ui/jquery-ui.js"></script>
+        <style>
+            
+        
+        </style>
+    </head>
+    
+    <body>
+        <div id="header">
+            <div id="logo">CodePlayer</div>
+            <div id="button_container">
+                <div id="html" class="btn active">HTML</div>
+                <div id="css" class="btn active ">CSS</div>
+                <div id="js" class="btn active">Javascript</div>
+                <div class="btn active">Output</div>
+            </div>
+        
+        </div>
+        <div id="html_input" class="input">
+            <textarea id="html_code"name="html"><p id="test">this is where your html text goes</p></textarea>
+        </div>
+        <div id="css_input" class="input">
+            <textarea id="css_code"name="html">p{
+color:green}</textarea>
+
+        </div>
+        <div id="js_input"class="input">
+            <textarea id="js_code" name="html" >document.getElementById("test").innerHTML="javascript is run inside the output iframe";</textarea>
+            
+            
+        </div>
+        <iframe id="output" class="clear input">
+            <style id="styles"></style>
+            <div id="content"></div>
+
+
+
+        </iframe>
+        
+        <div id ="footer">
+        
+        </div>
+        <script id="user_script" type="text/javascript">
+
+            
+            
+        </script>
+        
+        <script>
+                
+                //change color of buttons when hovered over
+                
+                //change pannel width based on number of button clicked
+                //document.getElementById("test").innerHTML("javascript is run inside the output iframe");
+
+                function update_output(){
+                    
+                    let css = $("#css_code").val();
+                    let javascript = $("#js_code").val();
+                    let content = $("#html_code").val();
+                     
+                    let html = "<html><head><style type='text/css'>"+ css + "             </style></head><body>" + content +  "</body></html>";
+                    
+                    console.log(html);                   
+                    console.log(javascript);
+                    $("iframe").contents().find('html').html(html);
+                    document.getElementById("output").contentWindow.eval(javascript);
+                    
+                    
+                    
+                }
+            
+                function update_width(){
+                    
+                    let input_width = 100/selected + "%";
+                    console.log("input_width is "+ input_width);
+                    return input_width;
+                    
+                }
+            
+            
+                $(".btn").click(function(){
+                    $(this).toggleClass("active")
+                    let panelId = $(this).attr("id") + "_input";
+                    console.log(panelId);
+                    $('#' + panelId ).toggle();
+
+                    selected = $(".active").length
+                    $(".input").css("width", update_width());
+
+                    
+                    
+                });
+
+            
+                update_output();
+
+            
+               
+            
+                $('textarea').bind('input propertychange', function() {
+                    
+
+                    update_output();
+                    
+                    
+                });
+                    
+
+                
+
+        
+        </script>
+
+    
+    
+    </body>
+
+
+
+
+
+
+
+
+
+</html>

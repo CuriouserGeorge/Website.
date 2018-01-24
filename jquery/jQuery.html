@@ -1,0 +1,120 @@
+<html>
+    <head>
+        <title>jQuery</title>
+        
+        <script type ="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        
+        <link rel="shortcut icon" type="image/png" href="jquery.png">
+        
+        <link href="https://fonts.googleapis.com/css?family=Bree+Serif" rel="stylesheet">
+        
+        <link id="css" rel="stylesheet" type="text/css" href="style.css">
+
+        
+    </head>
+    
+    <body>
+        
+        <div id="header">
+            <h1 id="title" >jQuery</h1>
+            <img src="jquery.png" alt="jQuery logo" id="logo">
+        </div>
+        
+        <div class="example">
+            <h1>Click the shapes to create an alert</h1>
+            <div id="blue_circle" class="circle">
+            </div>
+            
+            <div class="square">
+            </div>
+            
+            <div class="square">
+            </div>
+            
+        </div>
+        
+        <div class="example">
+            <h1>Change text when green circle is clicked or hovered over</h1>
+            <div id="green_circle" class="circle"></div>
+            <p id="change_text">This is some text</p>
+            
+        </div>
+
+        <div class="example">
+            <h1>Change source of an iframe</h1>
+            <p id="random_page"> Click on me to change the source.</p>
+            <iframe src="https://en.wikipedia.org/wiki/Main_Page"></iframe>
+            
+        </div> 
+        
+        <div class="example">
+            <h1>Change the page styles</h1>
+            <p id="style1"> New style</p>
+            <p id="style2"> Original</p>           
+        </div>
+
+        <div class="example">
+            <h1>Find the window width</h1>
+            <button id="update">update</button>
+            <p id="window_width"></p>
+        </div> 
+        
+        
+        <script>
+            //is jQuery installed?
+            
+            if (typeof jQuery =="undefined"){
+                
+                alert("jQuery is not installed");
+                }
+            else{
+                //alert("jQuery has been installed");
+            }
+            
+            //square and circles script
+            
+            $("#blue_circle").click(function(){
+              alert("The blue circle has been clicked") ; 
+            })
+            $(".square").click(function(){
+                alert("A square has been clicked")  ;             
+                               
+            })
+            
+            //change text script
+            $("#green_circle").mouseover(function(){
+                $("#change_text").html("Click it!")
+            })            
+            $("#green_circle").click(function(){
+                $("#change_text").html("The text has been changed!")
+            })
+            //change iframe
+            $("#random_page").click(function(){
+                $("iframe").attr("src", "https://en.wikipedia.org/wiki/Special:Random")
+            })
+            //change styles
+            $("#style1").click(function(){
+                $('#css').attr('href','style2.css');
+                
+            })
+            $("#style2").click(function(){
+                $('#css').attr('href','style.css');
+                
+            })                
+            //find screen info
+            $("#update").click(function(){
+                $("#window_width").html("The window width is : " + $(window).width()+ "px"); 
+            })
+            
+            $("#window_width").html("The window width is : " + $(window).width()+ "px");
+
+            
+
+        </script>
+    </body>
+
+
+
+
+
+</html>

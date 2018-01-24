@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+  <head>
+        <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+    
+   
+
+    <title>Postcode Finder</title>
+
+
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+    <style>
+    html, body{
+      margin: 0;
+      padding: 0;
+      height:100%;
+      width:100%;
+      max-width: 100%;
+    }
+    #wrapper{
+      padding-top: none;
+      background-image: url("map.jpeg");
+      width: 100%;
+      background-color: black;
+      height: 100vh;
+      color: white;
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: 50% 50%;
+    }
+    #main{
+      clear:both;
+      margin: 0 auto;
+    }
+      #address{
+        
+        height: 50px;
+        width: 100%;
+      }
+    #result{
+        display:none;
+        color: black;
+        margin: 5px 0px;
+        width: 50%;
+        float: left;
+      }
+      #postcode
+      #locate{
+        margin: 0 auto;
+      }
+      label{
+        
+        font-size: 30px;
+      }
+
+    </style>
+  </head>
+    <body onload="initialize()">
+      <div id="wrapper">
+        <div class="row h-100 justify-content-center align-items-center">
+          <div id ="main" class="container col-sm-6  justify-content-center">
+            
+            <form>
+              <div class="form-group"> 
+                <label for="address">Enter an address (UK)</label>
+                <input id="address" type="textbox" value="houses of parliment, london">
+              </div>  
+                <button type="button" id="locate" class="btn btn-primary justify-content-center align-items-center" onclick="codeAddress()">locate</button>
+          
+             
+            </form>
+            
+            <div class="card" id="result"><div id="postcode" class="card-body"></div></div>
+          </div>
+          
+          
+        </div> 
+      </div>
+    </body>
+    <script>
+      var geocoder;
+      var map;
+      function initialize() {
+        geocoder = new google.maps.Geocoder();
+      }
+
+      function codeAddress() {
+        var address = document.getElementById('address').value;
+        geocoder.geocode( { 'address': address + ",uk"}, function(results, status) {
+          if (status == 'OK') {
+            var addressString = results[0].formatted_address;
+            var regex = /[A-Z]{1,2}[0-9][0-9A-Z]?\s?[0-9][A-Z]{2}/g;
+            var postcode = addressString.match(regex);              
+                          
+            console.log(results[0].formatted_address);
+            console.log(postcode);
+            $('#postcode').html(postcode[0]);
+            $('#result').show();
+
+          } else {
+            alert('Geocode was not successful for the following reason: ' + status);
+          }
+        });
+      }
+    </script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"
+			  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+			  crossorigin="anonymous"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAjcG0CxlW8zV0L75I_hWHmioyYX9jWV-o&callback=initMap"
+    async defer></script>
+</html>

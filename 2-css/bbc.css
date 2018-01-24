@@ -1,0 +1,307 @@
+
+    body {
+        font-family: Helvetica, Arial, sans-serif;
+        width:auto;
+        background-color: #fff;
+        margin: 0;
+        padding: 0px;
+        z-index: 1;
+        max-width:1500px;
+    }
+    a:link {
+            color:black;
+            text-decoration: none;
+        }    
+     a:visited {
+        color: gray;
+        text-decoration: none;
+    }
+    a:hover{
+            text-decoration: underline;
+        }
+
+        div {
+            width: 100%;
+            margin: 0px auto;
+            border-radius: 0;
+            padding-left: 0px;
+            float:left;
+            overflow: hidden;
+        }
+        
+        ul{
+            padding: 0;
+
+        }
+        
+        li {
+            list-style-type: none;
+            float:left;
+            margin-left: 20px;
+            padding-right:20px;
+            border-right: 1px solid gray;
+
+        }
+        p{
+            overflow:hidden;
+        }
+        img{
+            width:100%;
+            height: 100%;
+            object-fit: cover;
+
+        }
+        svg{
+            fill: white;
+            height:1em;
+        }
+        i{
+            font-size:200%;
+        }
+        .rectangle{
+            width:200px;
+            height:100px;
+        }    
+    .indent{
+        padding-left: 20px;
+        padding-right: 0px;
+        }  
+    .wrapper {
+        width:100%;
+        border: 0px solid black;
+        margin:0px 20px 0px 20px;
+
+        
+        } 
+    .sub_article{
+            min-width: 250px;
+            width:25%;
+            height:320px;
+            background-color: white;
+            border: 0px solid black;
+        }    
+    .side_image{
+            min-width:50px;
+            padding: 10px;
+            height: 150px;
+            float:left;
+        }
+        
+    .side_text{
+        width:90%;
+        font-size:80%;
+            
+        }
+    .sub_text{
+        font-size:80%;        
+        }
+    .views{
+        border:none;
+        font-size:200%;
+        margin-right:20px;
+        padding: 20px;
+            
+        }
+    .whitespace{
+        height:500px   
+            
+        }  
+    .footer_list{
+        font-weight: bold;
+        float:left;
+        width:100px;
+        padding-right: 100px;
+        border-right:1px solid gray;   
+        }
+    .link{
+            float:left;
+            margin-left: 20px;
+            padding-right:20px;
+            border-right: 1px solid gray;
+            width:auto;
+            font-weight: bold;
+            
+        }    
+    #bbc_logo{
+        width:70px;  
+        margin-left: 0px;
+        }    
+
+    #toplinks{
+        min-width: 1200px;
+        height: 30px;
+        width:100%;
+        text-align: justify;
+        word-spacing: 10px;
+        padding-top:10px;
+        }
+    #toplinks li{
+        font-weight: bold;
+        padding-left: 0;    
+        }
+    #toplinks div:hover{
+            text-decoration: underline;
+        }
+    #searchbox {
+            border:none;
+            background-color: #E4E4E4;
+            font-weight: bold;
+            float:left;
+            height:20px;
+            width: 150px;
+        }
+    #searchicon{
+            height:22px;
+            width: 25px;
+            
+        }    
+    #banner{
+        height:70px;
+        background-color: #BB1919;
+        color:white;
+        width: 100%;
+        margin-right: 0;
+        padding: 0;
+        z-index: 3;
+            }
+    #links{
+        float:left;
+        background-color:#BB1919;
+        width:100%;
+        
+            
+        padding: 0px;
+        color:white;
+            
+        }
+    #links li{
+        margin:0px;
+        padding-left:20px;
+        padding-bottom: 6px;    
+        }
+   #links a:visited{
+        color:white;
+        text-decoration: none;        
+        border-bottom: 4px solid white;
+
+        }  
+    #links li:hover{
+        border-bottom: 4px solid white;
+        }
+    #home{
+            border-bottom:4px solid white;
+        }    
+        
+    #countries{
+        min-width: 1000px;
+        float:left;
+        background-color:white;
+        width:100%;    
+        padding: 0;
+        }
+ 
+    #mainarticle{
+        width:75%;
+        height:320px;
+        background-color: white;
+        border: 0px solid black;
+        margin-left:0px;
+        }
+    #side_article{
+            display:block;
+            width:25%;
+            min-width:200px;
+            height:320px;
+            float:left;
+            margin-left: 0;
+            vertical-align: top;
+        }    
+    #local{
+        float:right;
+        width:180px;
+        border: 1px  solid white;
+        margin-right:20px;
+        box-sizing: border-box;
+            
+        }
+
+    #main_text{
+            width:22%;
+            min-width:200px;
+            height:250px;
+            text-align:left;
+
+        }    
+    #main_image{
+            display:flex;
+            min-width:200px;
+            padding:inherit;
+            padding-top: 0px;
+            width:70%!important;
+            float:right;
+            padding:10px;
+            object-fit: cover;
+
+        }
+    #most_watched{
+            height:100%;
+            padding-bottom: 50px
+                
+        }
+    #most_watched ol{
+                counter-reset: item;
+            list-style-type: none;
+              column-count: 2;
+                column-gap: 1em;
+        }    
+    #most_watched li{
+            display: list-item;
+            list-style-position: inside;
+            padding-bottom:30px;
+            color:#BB1919;
+            font-size:300%;
+        }
+    #most_watched li span{
+            color:black;
+            font-size:25px;
+            font-weight: bold;
+            vertical-align:text-top;
+        }
+    #most_watched li:before {
+            content: counter(item) "  "; 
+            counter-increment: item 
+        }    
+    #sport{
+            
+        }    
+    #footer{
+            background-color: #4C4C4C;
+            height:100%;
+            width:100%;
+            min-width: 75%;
+            margin-top: 20px;
+            border-top: 2px solid gray;
+            color:white;
+        }
+    #footer li{
+            border: none;
+            margin-left: 10px;
+            padding-right: 40px;
+        }    
+    #search{
+        display: block;
+        float:left;
+        padding-bottom: 6px;
+        height:50px;
+        min-width;100px;
+        border: none;
+        padding-right: 0px;
+        }
+    #footer_title{
+        font-size:200%;
+        font-weight: bold;
+        }
+    #footer_links li{
+            padding-bottom: 10px;
+            width:200px;
+        } 

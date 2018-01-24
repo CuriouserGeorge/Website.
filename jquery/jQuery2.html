@@ -1,0 +1,222 @@
+<head>
+        <title>jQuery</title>
+        
+        <script type ="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        
+        <link rel="shortcut icon" type="image/png" href="jquery.png">
+        
+        <link href="https://fonts.googleapis.com/css?family=Bree+Serif" rel="stylesheet">
+        
+        <link id="css" rel="stylesheet" type="text/css" href="jq2style.css">
+
+        
+    </head>
+    
+    <body>
+        
+        <div id="header">
+            <h1 id="title" >jQuery</h1>
+            <img src="jquery.png" alt="jQuery logo" id="logo">
+        </div>
+        <div class="example">
+            <h1 >Make objects fade by clicking on them</h1>
+            <div id="normal_circle" class="circle">normal</div>
+            <div id="slow_circle" class="circle">slow</div>
+            <div id="fast_circle" class="circle">fast</div>
+            <div id="buttons">
+                <button id="fade_out">Fade out</button>
+                <button id="fade_in">Fade in</button>
+                <p id="fade_text">This text will fade away when you click on the button</p>
+                <p id="fadeIn_text">This has just faded in</p>
+            </div>
+            <div>
+                <button id="toggle">Toggle</button>
+                <p id="toggle_text">This text will fade in and out</p>
+            </div>
+            
+
+
+        </div>
+        <div class="example">
+            <h1>Animations</h1>
+            <p>Click the circle</p>
+            <div id="ani_circle" class="circle"></div>
+        
+        </div>
+        
+        <div id="ajax_header">
+            <h1 id="ajax">AJAX</h1>
+        </div>
+        <div class="example">
+            <h1>Importing Information From Another file</h1>
+            <a href="http://georgetimbrell.co.uk/jquery/info.txt"><p id="get"></p></a>
+            <p>click the button to import the digits of <a href="pi.txt">pi</a></p>
+            <button id="import_pi">pi</button>
+            <p id="pi"></p>
+        </div>
+        
+        <div id="regex_header">
+            <h1 id="regex"> regex </h1>
+        </div>
+        <h1>Form Validation</h1>
+        <p>Checks if email coforms to a valid email function.</p>
+        <p>Checks if mobile number contains only numbers.</p>
+        <p> Checks if passwords match.</p>
+        
+        <div id="form_wrapper">
+            <label for="email">Email</label>
+            <input type="text" name="email" id="email" placeholder="example@example.com">
+
+            <label for="phone">Mobile Number</label>
+            <input type="text" name="phone" id="phone" placeholder="07490203912">
+            
+            <label for="password">Password</label>
+            <input type="password" name="password" id="password" placeholder="">
+            
+            <label for="confirm">Confirm Password</label>
+            <input type="password" name="confirm" id="confirm" placeholder="">
+            
+            
+        </div>
+        <div id="form_submit">
+            <input type="submit" id=submit_button value="Sign Up">
+    
+        </div>
+        <div id="error_message"></div>
+        <div id="success_message"> <p>Form submitted &#10003</p> </div>
+        <div class="whitespace"></div>
+        
+        <script>
+            //fading circles
+            $("#normal_circle").click(function(){
+                
+                $(this).fadeOut();
+            })
+
+            $("#slow_circle").click(function(){
+                
+                $(this).fadeOut("slow");
+            })
+            $("#fast_circle").click(function(){
+                
+                $(this).fadeOut("fast");
+            })
+            //fading text
+            $("#fade_out").click(function(){
+                
+                $("#fade_text").fadeOut();
+            })
+            $("#fade_in").click(function(){
+                
+                $("#fadeIn_text").fadeIn();
+            })
+            $("#fade_out").click(function(){
+                
+                $("#fadeIn_text").fadeOut();
+            })
+            $("#toggle").click(function(){
+                if($("#toggle_text").css("display") == "none"){
+                    $("#toggle_text").fadeIn();
+                }
+                else{
+                    $("#toggle_text").fadeOut();
+
+                }
+            })
+            
+            //animations
+            
+            $("#ani_circle").click(function(){
+                $(this).animate({width:"150px",
+                                 height:"150px",
+                                 marginLeft:"500px",
+                                 backgroundColor:"#F012BE",
+
+                                },2000,function(){
+                    $(this).css("backgroundColor","#F012BE");
+                })
+            })
+            
+            //ajax
+            $.ajax("info.txt").done(function(data){
+                $("#get").html(data);
+            })
+                .fail(function(){
+                alert("could not get data")
+            })
+            $("#import_pi").click(function(){
+                $.ajax("pi.txt").done(function(data){
+                    $("#pi").html(data);
+                })
+                .fail(function(){
+                    alert("could not get data")
+                }) 
+            })
+            
+            
+            //regex
+            //input form
+                
+            function validateEmail(sEmail) {
+                var filter = /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+                if (filter.test(sEmail)) {
+                    return true;
+                }
+                else {
+                    return false;
+                }
+            }
+            let errorMessage = "";
+            let fieldsMissing = "";
+            
+            $("#submit_button").click(function(){
+                
+                if($("#email").val() == ""){
+                    fieldsMissing +="<br>Email"
+                }
+                
+                if($("#phone").val() == ""){
+                    fieldsMissing +="<br>Phone"
+                }
+                if($("#password").val() == ""){
+                    fieldsMissing +="<br>Password"
+                }
+                if($("#confirm").val() == ""){
+                    fieldsMissing +="<br>Confirmation password"
+                }
+                
+                if(fieldsMissing != ""){
+                    errorMessage += "<p>The following fields are empty:" + fieldsMissing;
+                }
+                
+                
+                if(!validateEmail($("#email").val())){
+                    errorMessage+= "<p>Invalid email input</p>"
+                    
+                }
+                if(!$.isNumeric($("#phone").val())){
+                    errorMessage += "<p>Phone number must contain only numbers</p>"
+                }
+                if($("#password").val()!=$("#confirm").val()){
+                    errorMessage += "<p>Passwords do not match</p>"
+                }
+                if(errorMessage != ""){
+                    $("#error_message").html(errorMessage);
+                    
+                }   else{
+                    
+                    $("#success_message").show();
+                    
+                }
+                console.log("error message is :" + errorMessage + "fields"+ fieldsMissing);
+                errorMessage = "";
+                fieldsMissing= "";
+
+            });
+
+
+            
+            
+        </script>
+        
+    </body>    

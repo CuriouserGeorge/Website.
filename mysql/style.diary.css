@@ -1,0 +1,39 @@
+body, html {
+  height: 100%;
+}
+
+.main{
+
+  width: 100%;
+  height: 100%;
+  background-image: url("images/lake.jpg");
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+#register{
+    height:66%;
+    background-color: none;
+    position: relative;
+    top:15%;
+
+}
+
+#diary{
+  margin:20px;
+  height: 90%;
+  width: 90%;
+  background: linear-gradient(
+  to bottom,
+  #ffffff,
+  #ffffff 50%,
+  #F5F5F5 50%,
+  #F5F5F5
+  );
+  background-size: 100% 40px;
+
+  
+  
+}
+      

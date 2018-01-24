@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>My App</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+    <meta charset="utf-8"/>
+    <link rel="stylesheet" href="app.min.css">
+		<style>
+          .textarea-large{
+            height:800px;
+            
+          }
+          .button{
+            
+            background-color: #0096E1,
+          }
+		</style>
+  </head>
+
+  <body>
+    <div class="app-page" data-page="home">
+      <div class="app-topbar">
+        <div class="app-title">Email App</div>
+      </div>
+
+      <div class="app-content">
+        <div class="app-section">
+          <div class="app-button green" data-target="">Click on the links to send an email.</div>
+
+        </div>
+        
+        <div class="app-section" id="previous_emails">
+          
+        </div>
+        
+        <div class="app-section">
+          <div class="app-button red" data-target="email">Send an email</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="app-page scroll-page" data-page="email">
+      <div class="app-topbar">
+        <div class="left app-button" data-back data-autotitle></div>
+          <div class="app-title">Compose Email</div>
+        </div>
+        <div class="app-content">
+          <div class="app-section">
+            <span>To:</span><input class="app-input" id="to_email">
+            <p id="to_err"></p>
+          </div>
+          <div class="app-section">
+            <span>From:</span><input class="app-input" id="from_email">
+            <p id="from_err"></p>
+
+          </div>           
+          <div class="app-section">
+            <p>Email body:</p>
+            <textarea class="app-input textarea-large" id="content_email"></textarea>
+            <p id="content_err"></p>
+
+            <div class="app-button blue" id="send">Send</div>
+
+          </div>  
+
+        </div>
+      </div>
+
+
+    <script src="zepto.js"></script>
+    <script src="app.min.js"></script>
+
+    <script type="text/javascript">
+      //functions
+        function validateEmail(email) {
+          var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+          return re.test(email);
+        }
+      function getEmails(){
+        if(localStorage.getItem("emails") != null){
+          console.log("emails found");
+          let emailList = JSON.parse(localStorage.getItem("emails"));
+          return emailList.sort();
+
+        }else{
+          let emailList = [];
+          return emailList;
+
+        }
+      }
+      
+      //app.js code  
+      App.controller('home', function (page) {
+        let storedEmails = getEmails();
+        console.log(storedEmails);
+        
+
+
+        storedEmails.forEach(function(email){
+              console.log(email);
+              $(page).find('#previous_emails').append('<div class="app-button get-email" data-target="email">'+ email +'</div>');
+          });
+        
+      $(page).find('.get-email')
+          .on('click',function (){
+            console.log(this.innerHTML);
+            App.load('email');
+            $('#to_email').val(this.innerHTML);
+
+        });
+
+
+      });
+      App.controller('email', function (page) {
+        console.log("loaded");
+        let storedEmails = getEmails();
+        
+        $(page).find('#send')
+          .on('click', function (){
+            storedEmails = getEmails();
+            console.log("stored emails are:" + storedEmails);
+            let data = {
+              to_email: $('#to_email').val(),
+              from_email: $('#from_email').val(),
+              content_email: $('#content_email').val(),
+            };
+            console.log(data);
+            let valid_to = validateEmail(data.to_email);
+            let valid_from = validateEmail(data.from_email);
+            let isValid = true;
+            if(!valid_to){
+              $('#to_err').html("invalid email");
+              isValid =false;
+            }
+            if(!valid_from){
+              $('#from_err').html("invalid email");
+              isValid =false;
+            }
+            if(data.content_email == ""){
+              console.log("invalid content")
+              $('#content_err').html("Your email is empty!");
+              isValid =false;
+            }
+          
+            if(isValid){
+              if( $.inArray(data.to_email, storedEmails) == -1){ 
+                storedEmails.push(data.to_email);
+                localStorage.setItem("emails", JSON.stringify(storedEmails));
+              }else{
+                console.log("value is already in list of emails");
+              }
+              $.ajax({
+                  type: "POST",
+                  url: "email.php",
+                  data: data,
+                  success: function(){
+                     if(true){ // if true (1)
+                        setTimeout(function(){// wait for 5 secs(2)
+                              alert('message sent');
+                             App.load('home'); // then reload the page.(3)
+                          
+                        }, 2000); 
+                     }
+                  }
+                
+              });
+            } 
+
+        });
+      });                     
+      //local storage
+      
+        if(typeof(Storage) !== undefined){
+          
+        }else{
+          alert("update your browser");
+        }
+        
+
+      try {
+        App.restore();
+      } catch (err) {
+        App.load('home');
+      }
+    </script>
+
+  </body>
+</html>

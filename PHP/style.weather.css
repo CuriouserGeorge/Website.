@@ -1,0 +1,35 @@
+body{
+  margin: 0;
+  padding: 0;
+  height:100%;
+  width:100%;
+  max-width: 100%;
+}
+#wrapper{
+  padding-top: none;
+  background-image: url("weather.jpg");
+  width: 100%;
+  background-color: black;
+  height: 100vh;
+  color: white;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+}
+#wrapper h1{
+  
+  margin-top: 0;
+  width: 100%;
+  max-width: 100%;  
+}
+
+
+#main{
+  clear:both;
+  margin: 0 auto;
+}
+.card{
+  
+  color:black;
+  margin-top: 15px;
+}
